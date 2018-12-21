@@ -12,14 +12,13 @@ namespace sec12_projeto_xadrez
         {
             Tabuleiro tab = new Tabuleiro(8, 8);
             try {
-                PosicaoXadrez pos = new PosicaoXadrez('a', 1);
-                Console.WriteLine(pos);
-                Console.WriteLine(pos.ToPosicao());
-                PosicaoXadrez pos2 = new PosicaoXadrez('c', 7);
-                Console.WriteLine(pos2);
-                Console.WriteLine(pos2.ToPosicao());
-            }
-            catch(TabuleiroException e)
+                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(3, 5));
+                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
+                tab.ColocarPeca(new Rei(tab, Cor.Branca), new Posicao(1, 3));
+                tab.ColocarPeca(new Rei(tab, Cor.Branca), new Posicao(0, 2));
+
+                Tela.ImprimirTabuleiro(tab);
+        }catch(TabuleiroException e)
             {
                 Console.WriteLine(e.Message);
             }
