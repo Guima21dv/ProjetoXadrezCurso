@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="jogo_de_xadrez\Peao.cs" />
+    <Compile Include="jogo_de_xadrez\PosicaoXadrez.cs" />
     <Compile Include="jogo_de_xadrez\Rei.cs" />
     <Compile Include="jogo_de_xadrez\Torre.cs" />
     <Compile Include="Program.cs" />

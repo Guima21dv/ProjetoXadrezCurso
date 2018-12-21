@@ -11,13 +11,15 @@ namespace sec12_projeto_xadrez
         static void Main(string[] args)
         {
             Tabuleiro tab = new Tabuleiro(8, 8);
-            try { 
-            tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
-            tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(1, 3));
-            tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(2, 4));
-            tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(0, 9));
-            Tela.ImprimirTabuleiro(tab);
-        }catch(TabuleiroException e)
+            try {
+                PosicaoXadrez pos = new PosicaoXadrez('a', 1);
+                Console.WriteLine(pos);
+                Console.WriteLine(pos.ToPosicao());
+                PosicaoXadrez pos2 = new PosicaoXadrez('c', 7);
+                Console.WriteLine(pos2);
+                Console.WriteLine(pos2.ToPosicao());
+            }
+            catch(TabuleiroException e)
             {
                 Console.WriteLine(e.Message);
             }
