@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Tabuleiro;
+
 
 namespace sec12_projeto_xadrez
 {
@@ -10,6 +8,7 @@ namespace sec12_projeto_xadrez
     {
         static void Main(string[] args)
         {
+            Posicao pos = new Posicao
         }
     }
 }
