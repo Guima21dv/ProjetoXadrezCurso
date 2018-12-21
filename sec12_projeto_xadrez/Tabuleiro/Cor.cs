@@ -1,5 +1,5 @@
 ﻿
-namespace sec12_projeto_xadrez.Tabuleiro
+namespace tabuleiro
 {
     enum Cor
     {

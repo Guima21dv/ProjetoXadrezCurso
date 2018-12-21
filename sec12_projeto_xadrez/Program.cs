@@ -1,5 +1,5 @@
 ﻿using System;
-using Tabuleiro;
+using tabuleiro;
 
 
 namespace sec12_projeto_xadrez
@@ -8,7 +8,11 @@ namespace sec12_projeto_xadrez
     {
         static void Main(string[] args)
         {
-            Posicao pos = new Posicao
+            Tabuleiro tab = new Tabuleiro(8, 8);
+
+            Tela.ImprimirTabuleiro(tab);
+
+            Console.ReadLine();
         }
     }
 }

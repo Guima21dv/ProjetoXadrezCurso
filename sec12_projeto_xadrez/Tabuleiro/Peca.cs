@@ -1,6 +1,6 @@
-﻿using Tabuleiro;
+﻿using tabuleiro;
 
-namespace sec12_projeto_xadrez.Tabuleiro
+namespace tabuleiro
 {
     class Peca
     {
