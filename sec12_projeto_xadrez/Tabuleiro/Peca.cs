@@ -11,14 +11,11 @@ namespace tabuleiro
         public Tabuleiro Tabuleiro { get; set; }
 
 
-        public Peca()
-        {
+        public Peca(){}
 
-        }
-
-        public Peca(Posicao posicao, Cor cor, Tabuleiro tabuleiro)
+        public Peca(Cor cor, Tabuleiro tabuleiro)
         {
-            Posicao = posicao;
+            Posicao = null;
             Cor = cor;
             QuantidadeDeMovimentos = 0;
             Tabuleiro = tabuleiro;
