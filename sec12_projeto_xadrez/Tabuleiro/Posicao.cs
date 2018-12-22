@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ ----------------------------------------------------------------------------------------
+ Esta classe implementa a posicao para a matriz, ou seja sua posição Linha e Coluna estão
+ No padrão matricial da linguagem e não do jogo geral.
 
+ ----------------------------------------------------------------------------------------
+ */
 namespace tabuleiro
 {
     class Posicao
@@ -15,16 +16,20 @@ namespace tabuleiro
         {
 
         }
-
         public Posicao(int linha, int coluna)
         {
             Linha = linha;
             Coluna = coluna;
         }
-
         public override string ToString()
         {
             return Linha + ", " + Coluna;
+        }
+
+        public void DefinirValores(int linha, int coluna)
+        {
+            Linha = linha;
+            Coluna = coluna;
         }
     }
 }

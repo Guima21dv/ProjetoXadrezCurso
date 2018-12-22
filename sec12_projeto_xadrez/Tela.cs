@@ -1,45 +1,89 @@
-﻿using System;
+﻿/*
+ -------------------------------------------------------------------------------------
+ Essas classe implementa os elementos que estarão na tela(camada de tela, ou view) du-
+ rante a partida(movimentos, frases indicativas, entradas do usuário e afins)
+ -------------------------------------------------------------------------------------
+ */
+
+using System;
 using tabuleiro;
+using jogo_de_xadrez;
 
 namespace sec12_projeto_xadrez
 {
     class Tela
     {
-        public static void ImprimirTabuleiro(Tabuleiro Tabuleiro)
+        public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
         {
-            for (int i = 0; i < Tabuleiro.Linhas; i++)
+            for (int i = 0; i < tabuleiro.Linhas; i++)
             {
                 Console.Write($"{8 - i} ");
-                for (int j = 0; j < Tabuleiro.Colunas; j++)
+                for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    
-                    if (Tabuleiro.Peca(i, j) == null)
-                    {
-                        Console.Write("- ");
-                    }
-                    else
-                    {
-                        ImprimirPeca(Tabuleiro.Peca(i,j));
-                    }
+                    ImprimirPeca(tabuleiro.Peca(i, j));
                 }
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
         }
 
+        public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] posicoesPossiveis)
+        {
+            ConsoleColor fundoOriginal = Console.BackgroundColor;
+            ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
+            for (int i = 0; i < tabuleiro.Linhas; i++)
+            {
+                Console.Write($"{8 - i} ");
+                for (int j = 0; j < tabuleiro.Colunas; j++)
+                {
+                    if (posicoesPossiveis[i, j])
+                    {
+                        Console.BackgroundColor = fundoAlterado;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = fundoOriginal;
+                    }
+                    ImprimirPeca(tabuleiro.Peca(i, j));
+                    Console.BackgroundColor = fundoOriginal;
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("  a b c d e f g h");
+            Console.BackgroundColor = fundoOriginal;
+        }
+
+
         public static void ImprimirPeca(Peca peca)
         {
-            if(peca.Cor == Cor.Branca)
+            if (peca == null)
             {
-                Console.Write(peca);
+                Console.Write("- ");
             }
             else
             {
-                ConsoleColor aux = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(peca);
-                Console.ForegroundColor = aux;
+                if (peca.Cor == Cor.Branca)
+                {
+                    Console.Write(peca);
+                }
+                else
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(peca);
+                    Console.ForegroundColor = aux;
+                }
+                Console.Write(" ");
             }
+        }
+       
+
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            int linha = int.Parse(s[1] + "");
+            return new PosicaoXadrez(coluna, linha);
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿using tabuleiro.exceptions;
+﻿/*
+ ----------------------------------------------------------------------
+ Classe que implementa o tabuleiro do jogo e controla a disposição das
+ peças do jogo e sua validade
+ */
+
+using tabuleiro.exceptions;
 
 namespace tabuleiro
 {
@@ -15,6 +21,7 @@ namespace tabuleiro
             Pecas = new Peca[linhas, colunas];
         }
 
+        //ACESSORES PARA A MATRIZ PECAS
         public Peca Peca(int linha, int coluna)
         {
             return Pecas[linha, coluna];
@@ -24,12 +31,14 @@ namespace tabuleiro
         {
             return Pecas[posicao.Linha, posicao.Coluna];
         }
-
+        //MÉTODO VERIFICADOR SE EXISTE ALGUMA PEÇA NA POSIÇÃO DADA
         public bool ExistePeca(Posicao posicao)
         {
             ValidaPosicao(posicao);
             return Peca(posicao) != null;
         }
+
+        //MÉTODOS QUE INSEREM E RETIRAM PEÇAS NO TABULEIRO
 
         public void ColocarPeca(Peca peca, Posicao posicao)
         {
@@ -40,6 +49,20 @@ namespace tabuleiro
             Pecas[posicao.Linha, posicao.Coluna] = peca;
             peca.Posicao = posicao;
         }
+
+        public Peca RetirarPeca(Posicao posicao)
+        {
+            if(Peca(posicao) == null)
+            {
+                return null;
+            }
+            Peca aux = Peca(posicao);
+            aux.Posicao = null;
+            Pecas[posicao.Linha, posicao.Coluna] = null;
+            return aux;
+        }
+
+        //VALIDAÇÃO DAS POSIÇÕES ONDE AS PEÇAS PODEM FICAR(CONTERMEANSURE TO INDEXOUTOFRANGE IN THE PRINCIPE)
 
         public bool PosicaoValida(Posicao posicao)
         {

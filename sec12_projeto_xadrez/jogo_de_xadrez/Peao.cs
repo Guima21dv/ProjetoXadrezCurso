@@ -11,7 +11,12 @@ namespace sec12_projeto_xadrez.jogo_de_xadrez
 
         public override string ToString()
         {
-            return "P ";
+            return "P";
+        }
+
+        public override bool[,] MovimentosPossiveis()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

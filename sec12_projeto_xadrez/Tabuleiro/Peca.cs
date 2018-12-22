@@ -1,8 +1,12 @@
-﻿using tabuleiro;
+﻿/*
+ ------------------------------------------------------------------------------
+ Esta classe implementa as propriedades gerais das peças de um jogo qualquer
+ ------------------------------------------------------------------------------
+ */
 
 namespace tabuleiro
 {
-    class Peca
+    abstract class Peca
     {
 
         public Posicao Posicao { get; set; }
@@ -11,7 +15,7 @@ namespace tabuleiro
         public Tabuleiro Tabuleiro { get; set; }
 
 
-        public Peca(){}
+        public Peca() { }
 
         public Peca(Cor cor, Tabuleiro tabuleiro)
         {
@@ -20,5 +24,17 @@ namespace tabuleiro
             QuantidadeDeMovimentos = 0;
             Tabuleiro = tabuleiro;
         }
+        //INCREMENTA A PROPRIEDADE CONTADORA DE MOVIMENTOS DA PEÇA
+        public void IncrementarQuantidadeDeMovimentos()
+        {
+            QuantidadeDeMovimentos++;
+        }
+        protected bool PodeMover(Posicao pos)
+        {
+            Peca p = Tabuleiro.Peca(pos);
+            return p == null || p.Cor != Cor;
+        }
+
+        public abstract bool[,] MovimentosPossiveis();
     }
 }
