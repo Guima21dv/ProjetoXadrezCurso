@@ -29,10 +29,33 @@ namespace tabuleiro
         {
             QuantidadeDeMovimentos++;
         }
+        //MÉTODO AUXILIAR RETORNA TRUE SE A POSIÇÃO SELECIONADA FOR VAZIA(NULL) OU FOR UMA PEÇA DO ADVERSÁRIO.
         protected bool PodeMover(Posicao pos)
         {
             Peca p = Tabuleiro.Peca(pos);
             return p == null || p.Cor != Cor;
+        }
+
+        public bool ExisteMovimentosPossiveis()
+        {
+            bool[,] mat = MovimentosPossiveis();
+            for(int i = 0; i < Tabuleiro.Linhas; i++)
+            {
+                for(int j = 0; j < Tabuleiro.Colunas; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
+        public bool PodeMoverPara(Posicao pos)
+        {
+            return MovimentosPossiveis()[pos.Linha, pos.Coluna];
         }
 
         public abstract bool[,] MovimentosPossiveis();

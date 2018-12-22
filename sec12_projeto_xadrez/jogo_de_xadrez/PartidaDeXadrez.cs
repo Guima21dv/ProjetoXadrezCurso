@@ -1,12 +1,13 @@
 ﻿using System;
 using tabuleiro;
+using tabuleiro.exceptions;
 namespace jogo_de_xadrez
 {
     class PartidaDeXadrez
     {
         public Tabuleiro Tabuleiro { get; private set; }//Tabuleiro relacionado com a partida.
-        private int Turno; // indica em que turno está a partida
-        private Cor JogadorAtual;//Indica de quem é a vez da jogada (Peças pretas ou peças brancas
+        public int Turno { get;private set; } // indica em que turno está a partida
+        public Cor JogadorAtual { get;private set; }//Indica de quem é a vez da jogada (Peças pretas ou peças brancas
         public bool Terminada { get;private set; }//Indica se a partida está terminada ou não.
 
         public PartidaDeXadrez()
@@ -24,6 +25,49 @@ namespace jogo_de_xadrez
             p.IncrementarQuantidadeDeMovimentos();
             Peca capturada = Tabuleiro.RetirarPeca(destino);
             Tabuleiro.ColocarPeca(p, destino);
+        }
+
+        public void RealizaJogada(Posicao origem, Posicao destino)
+        {
+            ExecutaMovimento(origem, destino);
+            Turno++;
+            MudaJogador();
+            
+        }
+
+        public void ValidarPosicaoOrigem(Posicao pos)
+        {
+            if(Tabuleiro.Peca(pos) == null)
+            {
+                throw new TabuleiroException("Não existe peça na posição de origem escolhida!");
+            }
+            if(JogadorAtual != Tabuleiro.Peca(pos).Cor)
+            {
+                throw new TabuleiroException("A peça de origem escolhida não é sua!");
+            }
+            if (!Tabuleiro.Peca(pos).ExisteMovimentosPossiveis())
+            {
+                throw new TabuleiroException("Não há movimentos possíveis para a peça de origem escolhida!");
+            }
+        }
+        public void ValidaPosicaoDestino(Posicao origem, Posicao destino)
+        {
+            if (!Tabuleiro.Peca(origem).PodeMoverPara(destino))
+            {
+                throw new TabuleiroException("Posição de destino inválida!");
+            }
+        }
+
+        private void MudaJogador()
+        {
+            if(JogadorAtual == Cor.Branca)
+            {
+                JogadorAtual = Cor.Preta;
+            }
+            else
+            {
+                JogadorAtual = Cor.Branca;
+            }
         }
         //COLOCA AS PEÇAS EM SUA POSIÇÃO INICIAL DA PARTIDA ( EM DESENVOLVIMENTO)
         private void ColocarPecas()
