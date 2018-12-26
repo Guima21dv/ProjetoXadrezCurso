@@ -20,10 +20,10 @@ namespace jogo_de_xadrez
             Posicao pos = new Posicao(0, 0);
             //VERIFICA A CASA AO NORTE
             pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
-            while(Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
-                if(Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
+                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
