@@ -29,6 +29,10 @@ namespace tabuleiro
         {
             QuantidadeDeMovimentos++;
         }
+        public void DecrementarQuantidadeDeMovimentos()
+        {
+            QuantidadeDeMovimentos--;
+        }
         //MÉTODO AUXILIAR RETORNA TRUE SE A POSIÇÃO SELECIONADA FOR VAZIA(NULL) OU FOR UMA PEÇA DO ADVERSÁRIO.
         protected bool PodeMover(Posicao pos)
         {
