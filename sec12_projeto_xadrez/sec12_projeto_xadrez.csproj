@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="jogo_de_xadrez\Bispo.cs" />
+    <Compile Include="jogo_de_xadrez\Cavalo.cs" />
+    <Compile Include="jogo_de_xadrez\Dama.cs" />
     <Compile Include="jogo_de_xadrez\PartidaDeXadrez.cs" />
     <Compile Include="jogo_de_xadrez\Peao.cs" />
     <Compile Include="jogo_de_xadrez\PosicaoXadrez.cs" />
