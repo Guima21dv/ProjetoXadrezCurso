@@ -44,6 +44,8 @@ namespace sec12_projeto_xadrez
                         Console.ReadLine();
                     }
                 }
+                Console.Clear();
+                Tela.ImprimirPartida(partida);
             }
             catch (TabuleiroException e)
             {

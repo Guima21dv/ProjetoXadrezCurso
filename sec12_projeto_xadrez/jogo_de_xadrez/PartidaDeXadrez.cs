@@ -26,7 +26,7 @@ namespace jogo_de_xadrez
 
 
         }
-
+        //MÉTODO PARA EXECUTAR MOVIMENTOS DE PEÇAS NO TABULEIRO
         public Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
             Peca p = Tabuleiro.RetirarPeca(origem);
@@ -39,7 +39,7 @@ namespace jogo_de_xadrez
             }
             return capturada;
         }
-
+        //MÉTODO QUE AO SER CHAMADO DESFAZ A JOGADA RETORNANDO AS PEÇAS PARA SEUS LOCAIS ANTES DA JOGADA.
         public void DesfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
         {
             Peca p = Tabuleiro.RetirarPeca(destino);
@@ -117,6 +117,37 @@ namespace jogo_de_xadrez
             return false;
         }
 
+        public bool TesteXequeMate(Cor cor)
+        {
+            if (!EstaEmXeque(cor))
+            {
+                return false;
+            }
+            foreach(Peca x in PecasEmJogo(cor))
+            {
+                bool[,] mat = x.MovimentosPossiveis();
+                for(int i = 0; i < Tabuleiro.Linhas; i++)
+                {
+                    for(int j = 0; j < Tabuleiro.Colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao origem = x.Posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = ExecutaMovimento(origem, destino);
+                            bool xeq = EstaEmXeque(cor);
+                            DesfazMovimento(origem, destino, pecaCapturada);
+                            if (!xeq)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         public void RealizaJogada(Posicao origem, Posicao destino)
         {
             
@@ -134,10 +165,18 @@ namespace jogo_de_xadrez
             else
             {
                 Xeque = false;
+
             }
-            Turno++;
-            MudaJogador();
-            
+
+            if (TesteXequeMate(Adversaria(JogadorAtual)))
+            {
+                Terminada = true;
+            }
+            else
+            {
+                Turno++;
+                MudaJogador();
+            }
         }
 
 
@@ -184,21 +223,12 @@ namespace jogo_de_xadrez
         private void ColocarPecas()
         {
 
-            //COLOCANDO AS PEÇAS BRANCAS
             ColocarNovaPeca('c', 1, new Torre(Tabuleiro, Cor.Branca));
-            ColocarNovaPeca('c', 2, new Torre(Tabuleiro, Cor.Branca));
-            ColocarNovaPeca('d', 2, new Torre(Tabuleiro, Cor.Branca));
-            ColocarNovaPeca('e', 2, new Torre(Tabuleiro, Cor.Branca));
-            ColocarNovaPeca('e', 1, new Torre(Tabuleiro, Cor.Branca));
             ColocarNovaPeca('d', 1, new Rei(Tabuleiro, Cor.Branca));
-            //COLOCANDO AS PEÇAS PRETAS
-            ColocarNovaPeca('c', 8, new Torre(Tabuleiro, Cor.Preta));
-            ColocarNovaPeca('c', 7, new Torre(Tabuleiro, Cor.Preta));
-            ColocarNovaPeca('d', 7, new Torre(Tabuleiro, Cor.Preta));
-            ColocarNovaPeca('e', 7, new Torre(Tabuleiro, Cor.Preta));
-            ColocarNovaPeca('e', 8, new Torre(Tabuleiro, Cor.Preta));
-            ColocarNovaPeca('d', 8, new Rei(Tabuleiro, Cor.Preta));
+            ColocarNovaPeca('h', 7, new Torre(Tabuleiro, Cor.Branca));
 
+            ColocarNovaPeca('a', 8, new Rei(Tabuleiro, Cor.Preta));
+            ColocarNovaPeca('b', 8, new Torre(Tabuleiro, Cor.Preta));
         }
     }
 }
