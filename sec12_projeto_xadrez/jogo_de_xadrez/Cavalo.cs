@@ -49,7 +49,7 @@ namespace jogo_de_xadrez
                 mat[pos.Linha, pos.Coluna] = true;
             }
             //VERIFICA A CASA AO SUDOESTE
-            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
+            pos.DefinirValores(Posicao.Linha + 2, Posicao.Coluna + 1);
             if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
@@ -60,7 +60,7 @@ namespace jogo_de_xadrez
             {
                 mat[pos.Linha, pos.Coluna] = true;
             }
-            //VERIFICA A CASA A NOROESTE
+            //
             pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 2);
             if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {

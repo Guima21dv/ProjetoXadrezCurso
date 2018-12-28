@@ -37,6 +37,26 @@ namespace jogo_de_xadrez
             {
                 Capturadas.Add(capturada);
             }
+            //#jogadaespecial ROQUE PEQUENO
+            if(p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemDaTorre = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoDaTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca T = Tabuleiro.RetirarPeca(origemDaTorre);
+                T.IncrementarQuantidadeDeMovimentos();
+                Tabuleiro.ColocarPeca(T, destinoDaTorre);
+            }
+
+            //#jogadaespecial ROQUE GRANDE
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemDaTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoDaTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca T = Tabuleiro.RetirarPeca(origemDaTorre);
+                T.IncrementarQuantidadeDeMovimentos();
+                Tabuleiro.ColocarPeca(T, destinoDaTorre);
+            }
+
             return capturada;
         }
         //MÉTODO QUE AO SER CHAMADO DESFAZ A JOGADA RETORNANDO AS PEÇAS PARA SEUS LOCAIS ANTES DA JOGADA.
@@ -49,7 +69,27 @@ namespace jogo_de_xadrez
                 Tabuleiro.ColocarPeca(pecaCapturada, destino);
                 Capturadas.Remove(pecaCapturada);
             }
-            Tabuleiro.ColocarPeca(p, origem);   
+            Tabuleiro.ColocarPeca(p, origem);
+
+            //#jogadaespecial ROQUE PEQUENO
+            if (p is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemDaTorre = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoDaTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca T = Tabuleiro.RetirarPeca(destinoDaTorre);
+                T.DecrementarQuantidadeDeMovimentos();
+                Tabuleiro.ColocarPeca(T, origemDaTorre);
+            }
+
+            //#jogadaespecial ROQUE GRANDE
+            if (p is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemDaTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoDaTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca T = Tabuleiro.RetirarPeca(destinoDaTorre);
+                T.DecrementarQuantidadeDeMovimentos();
+                Tabuleiro.ColocarPeca(T, origemDaTorre);
+            }
         }
         //RETORNA O CONJUNTO DE PEÇAS CAPTURADAS DA COR ESPECIFICADA
         public HashSet<Peca> PecasCapturadas(Cor cor)
@@ -227,7 +267,7 @@ namespace jogo_de_xadrez
             ColocarNovaPeca('b', 1, new Cavalo(Tabuleiro, Cor.Branca));
             ColocarNovaPeca('c', 1, new Bispo(Tabuleiro, Cor.Branca));
             ColocarNovaPeca('d', 1, new Dama(Tabuleiro, Cor.Branca));
-            ColocarNovaPeca('e', 1, new Rei(Tabuleiro, Cor.Branca));
+            ColocarNovaPeca('e', 1, new Rei(Tabuleiro, Cor.Branca, this));
             ColocarNovaPeca('f', 1, new Bispo(Tabuleiro, Cor.Branca));
             ColocarNovaPeca('g', 1, new Cavalo(Tabuleiro, Cor.Branca));
             ColocarNovaPeca('h', 1, new Torre(Tabuleiro, Cor.Branca));
@@ -245,7 +285,7 @@ namespace jogo_de_xadrez
             ColocarNovaPeca('b', 8, new Cavalo(Tabuleiro, Cor.Preta));
             ColocarNovaPeca('c', 8, new Bispo(Tabuleiro, Cor.Preta));
             ColocarNovaPeca('d', 8, new Dama(Tabuleiro, Cor.Preta));
-            ColocarNovaPeca('e', 8, new Rei(Tabuleiro, Cor.Preta));
+            ColocarNovaPeca('e', 8, new Rei(Tabuleiro, Cor.Preta, this));
             ColocarNovaPeca('f', 8, new Bispo(Tabuleiro, Cor.Preta));
             ColocarNovaPeca('g', 8, new Cavalo(Tabuleiro, Cor.Preta));
             ColocarNovaPeca('h', 8, new Torre(Tabuleiro, Cor.Preta));

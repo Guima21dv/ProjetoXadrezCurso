@@ -72,6 +72,7 @@ namespace jogo_de_xadrez
                     break;
                 }
                 pos.Linha--;
+                pos.Coluna--;
             }
             //VERIFICA A CASA AO NORDESTE
             pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
@@ -82,7 +83,8 @@ namespace jogo_de_xadrez
                 {
                     break;
                 }
-                pos.Linha++;
+                pos.Linha--;
+                pos.Coluna++;
             }
             //VERIFICA A CASA A SUDESTE
             pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
@@ -94,6 +96,7 @@ namespace jogo_de_xadrez
                     break;
                 }
                 pos.Coluna++;
+                pos.Linha++;
             }
             //VERIFICA A CASA AO SUDOESTE
             pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
@@ -105,6 +108,7 @@ namespace jogo_de_xadrez
                     break;
                 }
                 pos.Coluna--;
+                pos.Linha++;
             }
 
             return mat;
